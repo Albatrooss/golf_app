@@ -1,0 +1,50 @@
+{
+  "compilerOptions": {
+    "target": "es2020",
+    "allowJs": false,
+    "checkJs": false,
+    "emitDecoratorMetadata": true,
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "forceConsistentCasingInFileNames": true,
+    "importHelpers": true,
+    "incremental": false,
+    "jsx": "react-jsx",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "noEmit": true,
+    "noImplicitAny": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "strict": true,
+    "strictBindCallApply": true,
+    "strictFunctionTypes": true,
+    "strictNullChecks": true,
+    "stripInternal": true,
+    "lib": ["ESNext", "dom"],
+    "baseUrl": ".",
+    "plugins": [
+      {
+        "name": "ts-graphql-plugin",
+        "schema": "codegen/ts-graphql-schema.js",
+        "tag": "gql",
+        "typegen": {
+          "addons": [
+            "ts-graphql-plugin/addons/typed-query-document",
+            "./codegen/typegen-addons"
+          ]
+        }
+      }
+    ],
+    "paths": {
+      "@/components": ["client/components"],
+      "@/hooks": ["client/hooks"],
+      "@/pages/*": ["client/pages/*"],
+      "@/utils/*": ["client/utils/*"],
+      "@/server/*": ["server/*"],
+    }
+  },
+  "include": ["server", "client", "./global.d.ts"],
+  "exclude": [".vscode"]
+}

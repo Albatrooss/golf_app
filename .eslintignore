@@ -1,0 +1,5 @@
+src-legacy
+node_modules
+.eslintrc.js
+dist
+*.generated.ts

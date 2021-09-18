@@ -1,0 +1,5 @@
+*.generated.ts
+__generated__
+node_modules/
+.env
+
