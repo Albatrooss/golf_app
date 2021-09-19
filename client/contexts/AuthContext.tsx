@@ -1,6 +1,9 @@
-import React, { useCallback, useEffect } from 'react';
+import React, {
+  useCallback,
+  // useEffect
+} from 'react';
 import { useQuery, gql } from '@apollo/client';
-import { useRollbar } from '@rollbar/react';
+// import { useRollbar } from '@rollbar/react';
 
 export type AuthContextType = {
   auth: {
@@ -20,7 +23,7 @@ const AuthContext = React.createContext<
 const gql2 = gql;
 
 export const AuthContextProvider: React.FC = ({ children }) => {
-  const rollbar = useRollbar();
+  // const rollbar = useRollbar();
   const { data } = useQuery<{ user: AuthContextType['auth'] }>(
     gql2`
       query GetUser {
@@ -36,17 +39,17 @@ export const AuthContextProvider: React.FC = ({ children }) => {
     window.location.assign('/logout');
   }, []);
 
-  useEffect(() => {
-    rollbar.configure({
-      payload: {
-        context: 'ssr',
-        person: {
-          id: data!.user?.id,
-          username: data!.user?.username,
-        },
-      },
-    });
-  });
+  // useEffect(() => {
+  //   rollbar.configure({
+  //     payload: {
+  //       context: 'ssr',
+  //       person: {
+  //         id: data!.user?.id,
+  //         username: data!.user?.username,
+  //       },
+  //     },
+  //   });
+  // });
 
   return (
     <AuthContext.Provider

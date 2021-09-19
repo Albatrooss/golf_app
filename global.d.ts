@@ -7,7 +7,7 @@ interface Array<T> {
 type Int = number;
 type Float = number;
 
-declare module '@rollbar/react';
+// declare module '@rollbar/react';
 
 declare module '@/compiled-client-server' {
   export interface RenderAppResponse {

@@ -5,12 +5,12 @@ import {
   gql,
   createHttpLink,
 } from '@apollo/client';
-import Rollbar from 'rollbar';
+// import Rollbar from 'rollbar';
 import 'cross-fetch/polyfill';
 import { renderToStringWithData } from '@apollo/client/react/ssr';
 import { StaticRouter } from 'react-router';
 import { AuthContextType } from '@/contexts';
-import { Provider } from '@rollbar/react';
+// import { Provider } from '@rollbar/react';
 import { CacheProvider, extractEmotion } from './utils/ssr-css';
 // import typePolicies from './typePolicies';
 import App from './App';
@@ -25,7 +25,7 @@ interface SSROptions {
   template: string;
   userContext?: AuthContextType['auth'];
   wsJwt?: string;
-  rollbarConfig?: Rollbar.Configuration;
+  // rollbarConfig?: Rollbar.Configuration;
 }
 
 export const ssr = async ({
@@ -36,8 +36,8 @@ export const ssr = async ({
   template,
   userContext,
   wsJwt,
-  rollbarConfig,
-}: SSROptions) => {
+}: // rollbarConfig,
+SSROptions) => {
   const client = new ApolloClient({
     ssrMode: true,
     link: createHttpLink({
@@ -69,15 +69,15 @@ export const ssr = async ({
   const params = new URLSearchParams(query).toString();
 
   const Wrapper = (
-    <Provider config={rollbarConfig}>
-      <ApolloProvider client={client}>
-        <StaticRouter location={`${route}?${params}`} context={{}}>
-          <CacheProvider>
-            <App />
-          </CacheProvider>
-        </StaticRouter>
-      </ApolloProvider>
-    </Provider>
+    // <Provider config={rollbarConfig}>
+    <ApolloProvider client={client}>
+      <StaticRouter location={`${route}?${params}`} context={{}}>
+        <CacheProvider>
+          <App />
+        </CacheProvider>
+      </StaticRouter>
+    </ApolloProvider>
+    // </Provider>
   );
 
   const content = await renderToStringWithData(Wrapper);

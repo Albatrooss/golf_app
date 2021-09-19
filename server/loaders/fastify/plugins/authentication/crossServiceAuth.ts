@@ -15,7 +15,6 @@ import {
   CrossServiceError,
   NotFoundError,
 } from '../../../../errors';
-// import { BbOAuthUser } from './brokerbayOAuth2';
 
 export interface OAuthUser {
   id: string;

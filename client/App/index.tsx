@@ -2,7 +2,7 @@ import React from 'react';
 import './config';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import { Layout } from 'antd';
-import { RollbarContext } from '@rollbar/react';
+// import { RollbarContext } from '@rollbar/react';
 
 import { AuthContextProvider, LayoutContextProvider } from '@/contexts';
 
@@ -29,9 +29,9 @@ const App: React.FC = () => (
               <Switch>
                 {Object.entries(routes).map(([path, Page]) => (
                   <Route exact path={path} key={path}>
-                    <RollbarContext context={path}>
-                      <Page />
-                    </RollbarContext>
+                    {/* <RollbarContext context={path}> */}
+                    <Page />
+                    {/* </RollbarContext> */}
                   </Route>
                 ))}
                 <Redirect to="/feed" />
