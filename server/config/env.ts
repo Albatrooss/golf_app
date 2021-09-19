@@ -23,7 +23,7 @@ class EnvironmentVariables {
     JWT: this.get('JWT_SECRET'),
   };
 
-  PORT = this.getOptional('PORT', '3001');
+  PORT = this.getOptional('PORT', '3000');
 
   POSTGRES = {
     HOST: this.getOptional('POSTGRES_HOST', 'localhost'),
@@ -48,6 +48,12 @@ class EnvironmentVariables {
 
   AUTH = {
     CLIENT_ID: this.get('AUTH_CLIENT_ID'),
+    CLIENT_SECRET: this.get('AUTH_CLIENT_SECRET'),
+    SERVER_URL: this.get('AUTH_SERVER_URL'),
+  }
+
+  CROSS_SERVICE = {
+    TOKEN_DURATION: this.getOptional('TOKEN_DURATION', '10'),
     CLIENT_SECRET: this.get('AUTH_CLIENT_SECRET'),
     SERVER_URL: this.get('AUTH_SERVER_URL'),
   }

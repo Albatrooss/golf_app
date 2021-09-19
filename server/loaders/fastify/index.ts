@@ -18,6 +18,7 @@ import { ApiError, CrossServiceError } from '../../errors';
 import errorHandler from './plugins/errorHandler';
 import env from '../../config/env';
 import authentication from './plugins/authentication';
+import { LocalHostIpRanges, PrivateIpRanges } from './plugins/authentication/constants';
 // import loadDataLoader from '../dataLoaders';
 
 const locate = (...paths: string[]) => path.resolve(__dirname, ...paths);
@@ -113,22 +114,22 @@ const fastifyLoader = async ({
       deserializeUser: getUserById,
       isAuthorized: async user => user.id === '1',
     },
-    // crossServiceAuthPluginOption: {
-    //   auth: {
-    //     tokenHost: env.AUTH.SERVER_URL,
-    //     tokenPath: '/oauth/check_token',
-    //   },
-    //   redisClient,
-    //   tokenCacheDuration: parseInt(
-    //     env.CROSS_SERVICE.TOKEN_DURATION || '10',
-    //     10,
-    //   ),
-    //   ipRange: ['production', 'qa'].includes(env.NODE_ENV)
-    //     ? PrivateIpRanges
-    //     : LocalHostIpRanges,
-    //   serviceAccountMap,
-    //   deserializeUser: getUserById,
-    // },
+    crossServiceAuthPluginOption: {
+      auth: {
+        tokenHost: env.AUTH.SERVER_URL,
+        tokenPath: '/oauth/check_token',
+      },
+      redisClient,
+      tokenCacheDuration: parseInt(
+        env.CROSS_SERVICE.TOKEN_DURATION || '10',
+        10,
+      ),
+      ipRange: ['production', 'qa'].includes(env.NODE_ENV)
+        ? PrivateIpRanges
+        : LocalHostIpRanges,
+      // serviceAccountMap,
+      deserializeUser: getUserById,
+    },
   });
 
   // Register Mercurius File Upload
@@ -253,21 +254,21 @@ const fastifyLoader = async ({
       template: indexTemplate,
       userContext: req.user,
       wsJwt,
-      rollbarConfig: {
-        accessToken: env.ROLLBAR.ACCESS_TOKEN,
-        // environment: env.ROLLBAR.ENV,
-        addErrorContext: true,
-        captureIp: 'anonymize',
-        captureUncaught: true,
-        captureUnhandledRejections: true,
-        payload: {
-          context: 'ssr',
-          person: {
-            id: req.user?.id,
-            username: req.user?.username,
-          },
-        },
-      },
+      // rollbarConfig: {
+      //   accessToken: env.ROLLBAR.ACCESS_TOKEN,
+      //   environment: env.ROLLBAR.ENV,
+      //   addErrorContext: true,
+      //   captureIp: 'anonymize',
+      //   captureUncaught: true,
+      //   captureUnhandledRejections: true,
+      //   payload: {
+      //     context: 'ssr',
+      //     person: {
+      //       id: req.user?.id,
+      //       username: req.user?.username,
+      //     },
+      //   },
+      // },
     });
     reply.code(200).type('text/html').send(result);
   });

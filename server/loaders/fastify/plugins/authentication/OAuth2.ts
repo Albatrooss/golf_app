@@ -52,7 +52,7 @@ export type TokenResponse = {
   user_id: string;
 };
 
-export type BbOAuthJwtCookie = {
+export type OAuthJwtCookie = {
   refreshToken: string;
   accessToken: string;
   user: OAuthUser;
@@ -219,37 +219,37 @@ const bbOAuthPlugin: FastifyPluginCallback<OAuthPluginOptions> = async (
     authCookie: string,
   ) => {
     try {
-      // const verified = req.unsignCookie(
-      //   authCookie,
-      // ) as unknown as BbOAuthJwtCookie;
-      // req.log.debug({ verified }, 'Verified JWT Cookie');
-      // const isUserAuthorized = await isAuthorized(verified.user);
-      // if (!isUserAuthorized) {
-      //   throw new ForbiddenError('Forbidden');
-      // }
-      // req.user = verified.user;
+      const verified = req.unsignCookie(
+        authCookie,
+      ) as unknown as OAuthJwtCookie;
+      req.log.debug({ verified }, 'Verified JWT Cookie');
+      const isUserAuthorized = await isAuthorized(verified.user);
+      if (!isUserAuthorized) {
+        throw new ForbiddenError('Forbidden');
+      }
+      req.user = verified.user;
       req.user = {
         id: '1',
         username: 'albatrooss'
       }
-      // req.tokens = {
-      //   refreshToken: verified.refreshToken,
-      //   accessToken: verified.accessToken,
-      // };
       req.tokens = {
-        accessToken: '123',
-        refreshToken: '456'
-      }
+        refreshToken: verified.refreshToken,
+        accessToken: verified.accessToken,
+      };
+      // req.tokens = {
+      //   accessToken: '123',
+      //   refreshToken: '456'
+      // }
       return true;
     } catch (err) {
-      throw new UnauthorizedError('Invalid JWT');
-      // if (err instanceof ForbiddenError) throw err;
-      // if (err instanceof TokenExpiredError) {
-      //   await refreshAuth(req, reply, authCookie);
-      // } else {
-      //   reply.clearCookie(cookie.name, cookie.options);
-      //   throw new UnauthorizedError('Invalid JWT');
-      // }
+      // throw new UnauthorizedError('Invalid JWT');
+      if (err instanceof ForbiddenError) throw err;
+      if (err instanceof TokenExpiredError) {
+        await refreshAuth(req, reply, authCookie);
+      } else {
+        reply.clearCookie(cookie.name, cookie.options);
+        throw new UnauthorizedError(`Invalid JWT ${err.message}`);
+      }
     }
   };
 
@@ -258,6 +258,8 @@ const bbOAuthPlugin: FastifyPluginCallback<OAuthPluginOptions> = async (
     async (req: FastifyRequest, reply: FastifyReply) => {
       req.log.debug('Authenticating');
       const authCookie = req.cookies[cookie.name];
+      // const authCookie = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZWZyZXNoVG9rZW4iOiIxMjM0NTY3ODkwIiwiYWNjZXNzVG9rZW4iOiIxMjM0NTY3ODkwIiwidXNlcm5hbWUiOiJhbGJhdHJvb3NzIiwiaWF0IjoxNTE2MjM5MDIyLCJleHAiOjE1MTY5OTk5OX0.QFX1JU_avbofsl2pM9sq4x7Tv1QCR7ONecK7Vag4G6w';
+      req.log.debug(`Cookie: ${authCookie}`)
       if (!authCookie) {
         throw new UnauthorizedError('Missing JWT Cookie');
       }
