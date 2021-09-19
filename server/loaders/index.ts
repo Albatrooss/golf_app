@@ -2,11 +2,13 @@ import { Logger } from 'pino';
 import { Container } from 'typedi';
 import env from '../config/env';
 import dbLoader from './db';
-// import fastifyLoader from './fastify/index';
-// import redisLoader from './redis';
+import prismaLoader from './prisma';
+import fastifyLoader from './fastify/index';
+import redisLoader from './redis';
 import repositoryLoader from './repository';
 import schemaLoader from './schema';
-// import serviceLoader from './service';
+import serviceLoader from './service';
+import { COMPARISON_BINARY_OPERATORS } from '@babel/types';
 
 const GET_USER_PROJECTION = [
   'id',
@@ -27,23 +29,24 @@ type MainLoaderOption = {
 
 export default async ({ logger }: MainLoaderOption) => {
   try {
-    // const { client: redisClient, pubClient, subClient } = redisLoader();
-    // logger.info('Redis Client Loaded');
+    const { client: redisClient, pubClient, subClient } = redisLoader();
+    logger.info('Redis Client Loaded');
     // const [db, connection] = await dbLoader(Container);
     const connection = await dbLoader(Container);
     logger.info('Db Context Loaded');
+    const prisma = prismaLoader();
+    logger.info('Prisma Client Loaded');
 
-    // const repositories = repositoryLoader({
-    //   Container,
-    //   db,
-    //   connection,
-    // });
-    // logger.info(`Repositories Loaded`);
-    // const services = serviceLoader({
-    //   Container,
-    //   repositories,
-    // });
-    // logger.info(`Services Loaded`);
+    const repositories = repositoryLoader({
+      Container,
+      prisma
+    });
+    logger.info(`Repositories Loaded`);
+    const services = serviceLoader({
+      Container,
+      repositories,
+    });
+    logger.info(`Services Loaded`);
     const graphQlSchema = await schemaLoader();
     logger.info('GraphQL Schema Loaded');
     // crossModuleApiLoader({ schema: graphQlSchema, services });
@@ -52,23 +55,19 @@ export default async ({ logger }: MainLoaderOption) => {
       logger,
       graphQlSchema,
       services,
-      // redisClient,
-      // getUserById: async userId => {
-      //   // @TODO: Replace with cross service API
-      //   // @ts-ignore: _id exists on response
-      //   const { _id, ...user } = await db.User.findById(userId)
-      //     .select(GET_USER_PROJECTION)
-      //     .lean({
-      //       virtuals: true,
-      //       getters: true,
-      //     });
-      //   return user;
-      // },
+      redisClient,
+      getUserById: async userId => {
+        // @TODO: Replace with cross service API
+        // @ts-ignore: _id exists on response
+        const res = await connection.query(`SELECT * FROM Users WHERE id = ${userId}`);
+        console.log('getUserByID???', res)
+        return {id: '1', username: 'albatrooss'};
+      },
     });
     logger.info('Fastify App Loaded');
     return app;
   } catch (err) {
-    logger.error(err, 'Main Loader Failed');
+    logger.error(err as any, 'Main Loader Failed');
     process.exit(1);
   }
 };

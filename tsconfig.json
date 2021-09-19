@@ -27,7 +27,8 @@
     "plugins": [
       {
         "name": "ts-graphql-plugin",
-        "schema": "codegen/ts-graphql-schema.js",
+        "schema": "server/schema.gql",
+        // "schema": "codegen/ts-graphql-schema.js",
         "tag": "gql",
         "typegen": {
           "addons": [
@@ -39,8 +40,10 @@
     ],
     "paths": {
       "@/components": ["client/components"],
+      "@/contexts": ["client/contexts"],
       "@/hooks": ["client/hooks"],
       "@/pages/*": ["client/pages/*"],
+      "@/utils/": ["client/utils/index.ts"],
       "@/utils/*": ["client/utils/*"],
       "@/server/*": ["server/*"],
     }

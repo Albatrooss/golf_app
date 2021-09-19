@@ -7,6 +7,7 @@ const anySchema = buildSchema('type Query { _: String }');
 
 module.exports = () => {
   const schema = fs.readFileSync(resolve(__dirname, '../server/schema.gql'));
+  console.log(schema)
   const additional = printIntrospectionSchema(anySchema);
   return [
     schema,

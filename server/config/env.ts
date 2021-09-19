@@ -30,7 +30,7 @@ class EnvironmentVariables {
     USERNAME: this.get('POSTGRES_USERNAME'),
     PWD: this.get('POSTGRES_PASSWORD'),
     DB: this.get('POSTGRES_DB'),
-  }
+  };
 
   REDIS = {
     PORT: this.getOptional('REDIS_PORT', '6379'),
@@ -39,6 +39,18 @@ class EnvironmentVariables {
   };
 
   CORS_ORIGIN = this.get('CORS_ORIGIN');
+
+  ROLLBAR = {
+    ACCESS_TOKEN: this.get('ROLLBAR_TOKEN'),
+    LOG_LEVEL: this.get('ROLLBAR_LOG_LEVEL'),
+    ENV: this.get('ROLLBAR_ENV')
+  };
+
+  AUTH = {
+    CLIENT_ID: this.get('AUTH_CLIENT_ID'),
+    CLIENT_SECRET: this.get('AUTH_CLIENT_SECRET'),
+    SERVER_URL: this.get('AUTH_SERVER_URL'),
+  }
 }
 
 export default new EnvironmentVariables();

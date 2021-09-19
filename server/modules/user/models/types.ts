@@ -12,9 +12,6 @@ class User {
 
   @TypeGraphQL.Field(type => String)
   username!: string;
-
-  @TypeGraphQL.Field(type => String)
-  passwrod!: string;
 }
 
 export { User };

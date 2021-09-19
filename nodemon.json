@@ -1,0 +1,19 @@
+{
+  "restartable": "rs",
+  "ignore": [
+    ".git",
+    "node_modules/**/node_modules",
+    "server/**/*.spec.ts",
+    "server/assets/*"
+  ],
+  "verbose": false,
+  "watch": ["server/"],
+  "env": {
+    "NODE_ENV": "development"
+  },
+  "execMap": {
+    "ts": "ts-node-transpile-only"
+  },
+  "delay": "80ms",
+  "ext": "js,json,ts"
+}

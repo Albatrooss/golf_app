@@ -4,5 +4,4 @@ import { ObjectType } from "type-graphql";
 class User {
   id!: string;
   username!: string;
-  passwrod!: string;
 }
