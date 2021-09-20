@@ -1,6 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100&display=swap');
 :root {
-  --color-primary: #1665fc;
+  --color-primary: #7EAB1E;
+  --color-green: #A9DC3C;
   --monospace: Roboto Mono, Consolas, Menlo, monospace;
+}
+*,*::before,*::after {
+  margin: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+  margin-left: 0;
+  margin-right: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 body,
 input,
@@ -9,7 +20,7 @@ select,
 optgroup,
 textarea,
 html body {
-  font-family: Inter, system-ui, YuGothic, sans-serif;
+  font-family: 'Poppins', system-ui, YuGothic, sans-serif;
 }
 .ant-btn-primary {
   background: var(--color-primary);

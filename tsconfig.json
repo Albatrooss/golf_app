@@ -39,11 +39,12 @@
       }
     ],
     "paths": {
+      "@/assets/*": ["client/assets/*"],
       "@/components": ["client/components"],
       "@/contexts": ["client/contexts"],
       "@/hooks": ["client/hooks"],
       "@/pages/*": ["client/pages/*"],
-      "@/utils/": ["client/utils/index.ts"],
+      "@/utils": ["client/utils"],
       "@/utils/*": ["client/utils/*"],
       "@/server/*": ["server/*"],
     }

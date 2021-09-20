@@ -57,7 +57,7 @@ const fastifyLoader = async ({
   app.register(errorHandler, {
     // gcpErrorReportingOptions: {
     //   serviceContext: {
-    //     service: 'brokerbay-automaton',
+    //     service: 'golf',
     //   },
     // },
     redirectPath: {
@@ -94,7 +94,7 @@ const fastifyLoader = async ({
         authorizeHost: env.AUTH.SERVER_URL,
         authorizePath: `/oauth/authorize`,
         successHost: env.AUTH.SERVER_URL,
-        successPath: `/oauth/success/automaton`,
+        successPath: `/oauth/success/golf`,
       },
       cookie: {
         name: 'golf',
@@ -124,7 +124,7 @@ const fastifyLoader = async ({
         env.CROSS_SERVICE.TOKEN_DURATION || '10',
         10,
       ),
-      ipRange: ['production', 'qa'].includes(env.NODE_ENV)
+      ipRange: env.NODE_ENV === 'production'
         ? PrivateIpRanges
         : LocalHostIpRanges,
       // serviceAccountMap,

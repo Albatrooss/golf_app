@@ -13,11 +13,15 @@ const FeedPage = ({  }) => {
     }
   `;
 
-  const {data} = useQuery(TEST);
-  console.log(data)
+  const {data} = useQuery(TEST, {
+    variables: {
+      id: '1'
+    }
+  });
+  console.log('data', data)
   return (
     <div>
-      FEEEED
+      <p>FEEEED!!?</p>
     </div>
   )
 

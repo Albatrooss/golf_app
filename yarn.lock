@@ -14,7 +14,7 @@
   resolved "https://registry.yarnpkg.com/@ant-design/icons-svg/-/icons-svg-4.1.0.tgz#480b025f4b20ef7fe8f47d4a4846e4fee84ea06c"
   integrity sha512-Fi03PfuUqRs76aI3UWYpP864lkrfPo0hluwGqh7NJdLhvH4iRDc3jbJqZIvRDLHKbXrvAfPPV3+zjUccfFvWOQ==
 
-"@ant-design/icons@^4.6.3":
+"@ant-design/icons@^4.6.3", "@ant-design/icons@^4.6.4":
   version "4.6.4"
   resolved "https://registry.yarnpkg.com/@ant-design/icons/-/icons-4.6.4.tgz#21b037dbb90ee1bb7c632cca057006e57d992fd9"
   integrity sha512-li02J8ym721E24N3bw1oXRzFDV7m2MYQWs+WtJgVVjhNRv4sc6vL2a2M7SS8rWX3Uc/3GJfrokIJnMrmbIMuXQ==
@@ -36,7 +36,7 @@
     lodash "^4.17.21"
     resize-observer-polyfill "^1.5.0"
 
-"@apollo/client@^3.4.12":
+"@apollo/client@^3.1.3", "@apollo/client@^3.4.12":
   version "3.4.12"
   resolved "https://registry.yarnpkg.com/@apollo/client/-/client-3.4.12.tgz#7f1f5ff0988ccd736ea666cdc54eb4e62e860b5d"
   integrity sha512-k4Hsl+4zhqruKnI7iFIYzi7JGZgodrUEF/XF9gXde3blxMwID2zKj+pKB8vQ8MWEbfRMeuEno+PZkatR2nE8Mw==
@@ -1479,6 +1479,15 @@
   resolved "https://registry.npmjs.org/@tsconfig/node16/-/node16-1.0.2.tgz"
   integrity sha512-eZxlbI8GZscaGS7kkc/trHTT5xgrjH3/1n2JDwusC9iahPKWMRvRjJSAN5mCXviuTGQ/lHnhvv8Q1YTpnfz9gA==
 
+"@types/apollo-upload-client@^14.1.0":
+  version "14.1.0"
+  resolved "https://registry.yarnpkg.com/@types/apollo-upload-client/-/apollo-upload-client-14.1.0.tgz#21a57d7e3f29ff946ba51a53b3d7da46ddd21fbc"
+  integrity sha512-ZLvcEqu+l9qKGdrIpASt/A2WY1ghAC9L3qaoegkiBOccjxvQmWN9liZzVFiuHTuWseWpVbMklqbs/z+KEjll9Q==
+  dependencies:
+    "@apollo/client" "^3.1.3"
+    "@types/extract-files" "*"
+    graphql "^15.3.0"
+
 "@types/babel__core@^7.1.16":
   version "7.1.16"
   resolved "https://registry.yarnpkg.com/@types/babel__core/-/babel__core-7.1.16.tgz#bc12c74b7d65e82d29876b5d0baf5c625ac58702"
@@ -1578,6 +1587,11 @@
     "@types/express-serve-static-core" "^4.17.18"
     "@types/qs" "*"
     "@types/serve-static" "*"
+
+"@types/extract-files@*":
+  version "8.1.1"
+  resolved "https://registry.yarnpkg.com/@types/extract-files/-/extract-files-8.1.1.tgz#11b67e795ad2c8b483431e8d4f190db2fd22944b"
+  integrity sha512-dMJJqBqyhsfJKuK7p7HyyNmki7qj1AlwhUKWx6KrU7i1K2T2SPsUsSUTWFmr/sEM1q8rfR8j5IyUmYrDbrhfjQ==
 
 "@types/glob@^7.1.3":
   version "7.1.4"
@@ -1793,6 +1807,13 @@
   version "4.0.1"
   resolved "https://registry.npmjs.org/@types/tough-cookie/-/tough-cookie-4.0.1.tgz"
   integrity sha512-Y0K95ThC3esLEYD6ZuqNek29lNX2EM1qxV8y2FTLUB0ff5wWrk7az+mLrnNFUnaXcgKye22+sFBRXOgpPILZNg==
+
+"@types/ws@^7.4.7":
+  version "7.4.7"
+  resolved "https://registry.yarnpkg.com/@types/ws/-/ws-7.4.7.tgz#f7c390a36f7a0679aa69de2d501319f4f8d9b702"
+  integrity sha512-JQbbmxZTZehdc2iszGKs5oC3NFnjeay7mtAWrdt7qNtAVK0g19muApzAy4bm9byz79xa2ZnO/BOBC2R8RC5Lww==
+  dependencies:
+    "@types/node" "*"
 
 "@types/zen-observable@0.8.3":
   version "0.8.3"
@@ -2091,6 +2112,13 @@ anymatch@~3.1.2:
     normalize-path "^3.0.0"
     picomatch "^2.0.4"
 
+apollo-upload-client@^16.0.0:
+  version "16.0.0"
+  resolved "https://registry.yarnpkg.com/apollo-upload-client/-/apollo-upload-client-16.0.0.tgz#704c9bc21e12bd4687172876eb927cf756b2e524"
+  integrity sha512-aLhYucyA0T8aBEQ5g+p13qnR9RUyL8xqb8FSZ7e/Kw2KUOsotLUlFluLobqaE7JSUFwc6sKfXIcwB7y4yEjbZg==
+  dependencies:
+    extract-files "^11.0.0"
+
 app-root-path@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/app-root-path/-/app-root-path-3.0.0.tgz#210b6f43873227e18a4b810a032283311555d5ad"
@@ -2349,6 +2377,11 @@ babel-plugin-polyfill-regenerator@^0.2.2:
   integrity sha512-Goy5ghsc21HgPDFtzRkSirpZVW35meGoTmTOb2bxqdl60ghub4xOidgNTHaZfQ2FaxQsKmwvXtOAkcIS4SMBWg==
   dependencies:
     "@babel/helper-define-polyfill-provider" "^0.2.2"
+
+backo2@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/backo2/-/backo2-1.0.2.tgz#31ab1ac8b129363463e35b3ebb69f4dfcfba7947"
+  integrity sha1-MasayLEpNjRj41s+u2n038+6eUc=
 
 balanced-match@^1.0.0:
   version "1.0.2"
@@ -3574,6 +3607,11 @@ extend@~3.0.2:
   resolved "https://registry.npmjs.org/extend/-/extend-3.0.2.tgz"
   integrity sha512-fjquC59cD7CyW6urNXK0FBufkZcoiGG80wTuPujX590cB5Ttln20E2UB4S/WARVqhXffZl2LNgS+gQdPIIim/g==
 
+extract-files@^11.0.0:
+  version "11.0.0"
+  resolved "https://registry.yarnpkg.com/extract-files/-/extract-files-11.0.0.tgz#b72d428712f787eef1f5193aff8ab5351ca8469a"
+  integrity sha512-FuoE1qtbJ4bBVvv94CC7s0oTnKUGvQs+Rjf1L2SJFfS+HTVVjhPFtehPdQ0JiGPqVNfSSZvL5yzHHQq2Z4WNhQ==
+
 extsprintf@1.3.0:
   version "1.3.0"
   resolved "https://registry.npmjs.org/extsprintf/-/extsprintf-1.3.0.tgz"
@@ -4708,7 +4746,7 @@ isutf8@^2.1.0:
   resolved "https://registry.yarnpkg.com/isutf8/-/isutf8-2.1.0.tgz#b6d08a02d4ce43bf3b4be39b9b60231b88dfeb2b"
   integrity sha512-rEMU6f82evtJNtYMrtVODUbf+C654mos4l+9noOueesUMipSWK6x3tpt8DiXhcZh/ZOBWYzJ9h9cNAlcQQnMiQ==
 
-iterall@^1.3.0:
+iterall@^1.2.1, iterall@^1.3.0:
   version "1.3.0"
   resolved "https://registry.npmjs.org/iterall/-/iterall-1.3.0.tgz"
   integrity sha512-QZ9qOMdF+QLHxy1QIpUHUU1D5pS2CG2P69LF6L6CPjPYA/XMOmKV3PZpawHoAjHNyB0swdVTRxdYT4tbBbxqwg==
@@ -7221,6 +7259,17 @@ stylis@^4.0.3:
   resolved "https://registry.yarnpkg.com/stylis/-/stylis-4.0.10.tgz#446512d1097197ab3f02fb3c258358c3f7a14240"
   integrity sha512-m3k+dk7QeJw660eIKRRn3xPF6uuvHs/FFzjX3HQ5ove0qYsiygoAhwn5a3IYKaZPo5LrYD0rfVmtv1gNY1uYwg==
 
+subscriptions-transport-ws@^0.9.19:
+  version "0.9.19"
+  resolved "https://registry.yarnpkg.com/subscriptions-transport-ws/-/subscriptions-transport-ws-0.9.19.tgz#10ca32f7e291d5ee8eb728b9c02e43c52606cdcf"
+  integrity sha512-dxdemxFFB0ppCLg10FTtRqH/31FNRL1y1BQv8209MK5I4CwALb7iihQg+7p65lFcIl8MHatINWBLOqpgU4Kyyw==
+  dependencies:
+    backo2 "^1.0.2"
+    eventemitter3 "^3.1.0"
+    iterall "^1.2.1"
+    symbol-observable "^1.0.4"
+    ws "^5.2.0 || ^6.0.0 || ^7.0.0"
+
 supports-color@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/supports-color/-/supports-color-2.0.0.tgz#535d045ce6b6363fa40117084629995e9df324c7"
@@ -7247,6 +7296,11 @@ supports-hyperlinks@^2.0.0:
   dependencies:
     has-flag "^4.0.0"
     supports-color "^7.0.0"
+
+symbol-observable@^1.0.4:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/symbol-observable/-/symbol-observable-1.2.0.tgz#c22688aed4eab3cdc2dfeacbb561660560a00804"
+  integrity sha512-e900nM8RRtGhlV36KGEU9k65K3mPb1WV70OdjfxlG2EAuM1noi/E/BaW/uMhL7bPEssK8QV57vN3esixjUvcXQ==
 
 symbol-observable@^4.0.0:
   version "4.0.0"
@@ -7893,7 +7947,7 @@ write-file-atomic@^3.0.0:
     signal-exit "^3.0.2"
     typedarray-to-buffer "^3.1.5"
 
-ws@^7.5.2:
+"ws@^5.2.0 || ^6.0.0 || ^7.0.0", ws@^7.5.2:
   version "7.5.5"
   resolved "https://registry.yarnpkg.com/ws/-/ws-7.5.5.tgz#8b4bc4af518cfabd0473ae4f99144287b33eb881"
   integrity sha512-BAkMFcAzl8as1G/hArkxOxq3G7pjUqQ3gzYbLL0/5zNkph70e+lCoxBGnm6AW1+/aiNeV4fnKqZ8m4GZewmH2w==
