@@ -4,14 +4,27 @@ import * as TypeGraphQL from 'type-graphql';
 export type FixDecorator<T> = T;
 
 import { ObjectType } from 'type-graphql';
+import { Score } from '../../score/models';
 
 @ObjectType()
 class User {
-  @TypeGraphQL.Field(type => String)
-  id!: string;
+  @TypeGraphQL.Field(type => Number)
+  id!: number;
 
   @TypeGraphQL.Field(type => String)
   username!: string;
+
+  @TypeGraphQL.Field(type => Role)
+  role!: FixDecorator<Role>;
+
+  @TypeGraphQL.Field(type => [typeof Score === 'undefined' ? Object : Score])
+  scores!: Score[];
 }
 
-export { User };
+type Role = 'USER' | 'ADMIN';
+const Role = {
+  USER: 'USER' as Role,
+  ADMIN: 'ADMIN' as Role,
+};
+TypeGraphQL.registerEnumType(Role, { name: 'Role' });
+export { User, Role };

@@ -10,10 +10,95 @@ generator client {
   provider = "prisma-client-js"
 }
 
+generator typegraphql {
+  provider  = "typegraphql-prisma"
+  output    = "../prisma/generated/type-graphql"
+}
+
 model User {
   id                 Int                  @id @default(autoincrement())
   createdAt          DateTime             @default(now())
   updatedAt          DateTime             @updatedAt
-  username           String
+  username           String               @unique
   password           String
+  role               Role                 @default(USER)
+  scores             Score[]              
+}
+
+model Score {
+  id                 Int                  @id @default(autoincrement())
+  createdAt          DateTime             @default(now())
+  updatedAt          DateTime             @updatedAt
+  user               User                 @relation(fields: [userId], references:[id])
+  userId             Int
+  course             Course                 @relation(fields: [courseId], references:[id])
+  courseId           Int
+  scr1               Int?
+  scr2               Int?
+  scr3               Int?
+  scr4               Int?
+  scr5               Int?
+  scr6               Int?
+  scr7               Int?
+  scr8               Int?
+  scr9               Int?
+  scr10              Int?
+  scr11              Int?
+  scr12              Int?
+  scr13              Int?
+  scr14              Int?
+  scr15              Int?
+  scr16              Int?
+  scr17              Int?
+  scr18              Int?
+  date               DateTime?
+}
+
+model Course {
+  id                 Int                  @id @default(autoincrement())
+  createdAt          DateTime             @default(now())
+  updatedAt          DateTime             @updatedAt
+  name               String               @unique
+  scores             Score[]
+  par1               Int?
+  hdc1               Int?
+  par2               Int?
+  hdc2               Int?
+  par3               Int?
+  hdc3               Int?
+  par4               Int?
+  hdc4               Int?
+  par5               Int?
+  hdc5               Int?
+  par6               Int?
+  hdc6               Int?
+  par7               Int?
+  hdc7               Int?
+  par8               Int?
+  hdc8               Int?
+  par9               Int?
+  hdc9               Int?
+  par10              Int?
+  hdc10              Int?
+  par11              Int?
+  hdc11              Int?
+  par12              Int?
+  hdc12              Int?
+  par13              Int?
+  hdc13              Int?
+  par14              Int?
+  hdc14              Int?
+  par15              Int?
+  hdc15              Int?
+  par16              Int?
+  hdc16              Int?
+  par17              Int?
+  hdc17              Int?
+  par18              Int?
+  hdc18              Int?
+}
+
+enum Role {
+  USER
+  ADMIN
 }

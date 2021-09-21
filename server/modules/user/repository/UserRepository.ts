@@ -1,5 +1,4 @@
 import { Prisma } from '.prisma/client';
-import { User } from '@/server/loaders/db/entities/User';
 import { Service } from 'typedi';
 
 @Service()
@@ -17,6 +16,20 @@ class UserRepository {
         password,
       },
     });
+  }
+
+  async find(id: number) {
+    return await this.dbContext.findUnique({
+      where: {
+        id
+      },
+      select: {
+        id: true,
+        username: true,
+        role: true,
+        scores: true
+      }
+    })
   }
 }
 

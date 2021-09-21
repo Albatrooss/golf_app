@@ -8,6 +8,8 @@ import { formatCode } from './util';
 const files = [
   '../server/modules/user/models/types.raw.ts',
   // '../server/modules/user/resolvers/inputs/types.raw.ts',
+  '../server/modules/score/models/types.raw.ts',
+  // '../server/modules/score/resolvers/inputs/types.raw.ts',
 ];
 
 const transformer = ({

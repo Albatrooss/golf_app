@@ -3,15 +3,36 @@
 # !!!   DO NOT MODIFY THIS FILE BY YOURSELF   !!!
 # -----------------------------------------------
 
+"""
+The javascript `Date` as string. Type represents date and time as the ISO Date string.
+"""
+scalar DateTime
+
 type Mutation {
   register: Boolean!
 }
 
 type Query {
-  user(id: String!): User!
+  user(id: Int!): User
+}
+
+enum Role {
+  ADMIN
+  USER
+}
+
+type Score {
+  back: [Float!]!
+  date: DateTime
+
+  """course!: Course;"""
+  front: [Float!]!
+  id: Float!
 }
 
 type User {
-  id: String!
+  id: Float!
+  role: Role!
+  scores: [Score!]!
   username: String!
 }

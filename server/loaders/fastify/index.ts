@@ -19,6 +19,7 @@ import errorHandler from './plugins/errorHandler';
 import env from '../../config/env';
 import authentication from './plugins/authentication';
 import { LocalHostIpRanges, PrivateIpRanges } from './plugins/authentication/constants';
+import { Prisma, User } from '.prisma/client';
 // import loadDataLoader from '../dataLoaders';
 
 const locate = (...paths: string[]) => path.resolve(__dirname, ...paths);
@@ -34,7 +35,7 @@ type FastifyLoaderOptions = {
   logger: Logger;
   services: Services;
   redisClient: Redis;
-  getUserById: (userId: string) => Promise<any>;
+  getUserById: (id: number) => Promise<User | null>;
 };
 
 const fastifyLoader = async ({

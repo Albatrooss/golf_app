@@ -36,10 +36,9 @@ export default async ({ logger }: MainLoaderOption) => {
     logger.info('Db Context Loaded');
     const prisma = prismaLoader();
     logger.info('Prisma Client Loaded');
-
     const repositories = repositoryLoader({
       Container,
-      prisma
+      prisma,
     });
     logger.info(`Repositories Loaded`);
     const services = serviceLoader({
@@ -56,12 +55,8 @@ export default async ({ logger }: MainLoaderOption) => {
       graphQlSchema,
       services,
       redisClient,
-      getUserById: async userId => {
-        // @TODO: Replace with cross service API
-        // @ts-ignore: _id exists on response
-        const res = await connection.query(`SELECT * FROM Users WHERE id = ${userId}`);
-        console.log('getUserByID???', res)
-        return {id: '1', username: 'albatrooss'};
+      getUserById: async id => {
+        return await prisma.user.findFirst({ where: { id } });
       },
     });
     logger.info('Fastify App Loaded');

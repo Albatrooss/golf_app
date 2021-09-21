@@ -1,7 +1,15 @@
-import { ObjectType } from "type-graphql";
+import { ObjectType } from 'type-graphql';
+import { Score } from '../../score/models';
 
 @ObjectType()
 class User {
-  id!: string;
+  id!: number;
   username!: string;
+  role!: Role;
+  scores!: Score[];
+}
+
+enum Role {
+  USER = 'USER',
+  ADMIN = 'ADMIN',
 }
