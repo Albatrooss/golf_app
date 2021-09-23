@@ -1,5 +1,5 @@
 import React from 'react';
-import { styled } from '@/utils/';
+import { styled } from '@/utils';
 
 const Logo = () => {
   return (
