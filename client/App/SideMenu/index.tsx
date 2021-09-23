@@ -47,7 +47,7 @@ const SideMenu: React.FC = () => {
           selectedKeys={selectedKeys}
         >
             <Menu.Item key="/leaderboard">LeaderBoard</Menu.Item>
-            <Menu.Item key="/players">Players</Menu.Item>
+            <Menu.Item key="/players">PlayersTEST</Menu.Item>
             <Menu.Item key="/courses">Courses</Menu.Item>
             <Menu.Item key="/rounds">My Rounds</Menu.Item>
         </StyledMenu>
