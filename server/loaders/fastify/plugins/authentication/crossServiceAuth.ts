@@ -17,7 +17,7 @@ import {
 } from '../../../../errors';
 
 export interface OAuthUser {
-  id: string;
+  id: number;
   username: string;
 }
 
@@ -48,13 +48,8 @@ export type CrossServiceAuthPluginOptions = {
 
 const crossServiceAuthPlugin: FastifyPluginCallback<CrossServiceAuthPluginOptions> =
   async (fastify, options) => {
-    const {
-      auth,
-      redisClient,
-      tokenCacheDuration,
-      ipRange,
-      deserializeUser,
-    } = options;
+    const { auth, redisClient, tokenCacheDuration, ipRange, deserializeUser } =
+      options;
 
     const fetchUser = async (req: FastifyRequest, userId: string) => {
       const user = await deserializeUser(userId);
@@ -112,9 +107,7 @@ const crossServiceAuthPlugin: FastifyPluginCallback<CrossServiceAuthPluginOption
         return false;
       } catch (err) {
         if (err instanceof ForbiddenError) throw err;
-        throw new CrossServiceError(
-          `Invalid Bearer Token, ${err.message}`,
-        );
+        throw new CrossServiceError(`Invalid Bearer Token, ${err.message}`);
       }
     };
 
@@ -139,9 +132,7 @@ const crossServiceAuthPlugin: FastifyPluginCallback<CrossServiceAuthPluginOption
           // If without bearer token, check IP
           // we are back from the redirect. Check the IP address
           if (!req.ip || !isLocal(req.ip)) {
-            throw new UnauthorizedError(
-              `Unauthorized IP Address: ${req.ip}`,
-            );
+            throw new UnauthorizedError(`Unauthorized IP Address: ${req.ip}`);
           }
           // const accountType = req.headers[
           //   'bb-cross-service'

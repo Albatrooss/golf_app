@@ -1,5 +1,6 @@
 import React, {
   useCallback,
+  useContext,
   // useEffect
 } from 'react';
 import { useQuery, gql } from '@apollo/client';
@@ -22,6 +23,8 @@ const AuthContext = React.createContext<
 // We alias `gql` function here so ts-graphql-plugin won’t attempt to type check the query.
 const gql2 = gql;
 
+export const useAuthContext = () => useContext(AuthContext);
+
 export const AuthContextProvider: React.FC = ({ children }) => {
   // const rollbar = useRollbar();
   const { data } = useQuery<{ user: AuthContextType['auth'] }>(
@@ -38,18 +41,6 @@ export const AuthContextProvider: React.FC = ({ children }) => {
   const logout = useCallback(() => {
     window.location.assign('/logout');
   }, []);
-
-  // useEffect(() => {
-  //   rollbar.configure({
-  //     payload: {
-  //       context: 'ssr',
-  //       person: {
-  //         id: data!.user?.id,
-  //         username: data!.user?.username,
-  //       },
-  //     },
-  //   });
-  // });
 
   return (
     <AuthContext.Provider

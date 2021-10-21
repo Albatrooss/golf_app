@@ -5,10 +5,7 @@ import fp from 'fastify-plugin';
 import { FastifyPluginCallback, FastifyRequest, FastifyReply } from 'fastify';
 import { CookieSerializeOptions } from 'fastify-cookie';
 import { TokenExpiredError, decode } from 'jsonwebtoken';
-import {
-  ForbiddenError,
-  UnauthorizedError,
-} from '../../../../errors';
+import { ForbiddenError, UnauthorizedError } from '../../../../errors';
 import { OAuthUser } from './crossServiceAuth';
 
 declare module 'fastify' {
@@ -229,9 +226,9 @@ const bbOAuthPlugin: FastifyPluginCallback<OAuthPluginOptions> = async (
       }
       req.user = verified.user;
       req.user = {
-        id: '1',
-        username: 'albatrooss'
-      }
+        id: 8,
+        username: 'albatrooss',
+      };
       req.tokens = {
         refreshToken: verified.refreshToken,
         accessToken: verified.accessToken,
@@ -257,9 +254,10 @@ const bbOAuthPlugin: FastifyPluginCallback<OAuthPluginOptions> = async (
     'authenticate',
     async (req: FastifyRequest, reply: FastifyReply) => {
       req.log.debug('Authenticating');
-      const authCookie = req.cookies[cookie.name];
-      // const authCookie = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZWZyZXNoVG9rZW4iOiIxMjM0NTY3ODkwIiwiYWNjZXNzVG9rZW4iOiIxMjM0NTY3ODkwIiwidXNlcm5hbWUiOiJhbGJhdHJvb3NzIiwiaWF0IjoxNTE2MjM5MDIyLCJleHAiOjE1MTY5OTk5OX0.QFX1JU_avbofsl2pM9sq4x7Tv1QCR7ONecK7Vag4G6w';
-      req.log.debug(`Cookie: ${authCookie}`)
+      // const authCookie = req.cookies[cookie.name];
+      const authCookie =
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZWZyZXNoVG9rZW4iOiIxMjM0NTY3ODkwIiwiYWNjZXNzVG9rZW4iOiIxMjM0NTY3ODkwIiwiZXhwIjoxNzE2MjM5MDIyLCJpYXQiOjE1MTYyMzkwMjIsInVzZXIiOnsiaWQiOjgsInVzZXJuYW1lIjoiYWxiYXRyb29zcyJ9fQ.wmDTB5aWp-MaxYD80oChV5atSVQo5mM7ONeooshyTds';
+      req.log.debug(`Cookie: ${authCookie}`);
       if (!authCookie) {
         throw new UnauthorizedError('Missing JWT Cookie');
       }

@@ -4,7 +4,7 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 import { Layout } from 'antd';
 // import { RollbarContext } from '@rollbar/react';
 import { ThemeProvider } from '@emotion/react';
-import { theme } from '@/utils/';
+import { theme } from '@/utils';
 import { AuthContextProvider, LayoutContextProvider } from '@/contexts';
 
 import FeedPage from './pages/Feed';

@@ -18,7 +18,10 @@ import { ApiError, CrossServiceError } from '../../errors';
 import errorHandler from './plugins/errorHandler';
 import env from '../../config/env';
 import authentication from './plugins/authentication';
-import { LocalHostIpRanges, PrivateIpRanges } from './plugins/authentication/constants';
+import {
+  LocalHostIpRanges,
+  PrivateIpRanges,
+} from './plugins/authentication/constants';
 import { Prisma, User } from '.prisma/client';
 // import loadDataLoader from '../dataLoaders';
 
@@ -113,7 +116,10 @@ const fastifyLoader = async ({
       authLogoutRoute: '/logout',
       authSuccessRedirectRoute: '/',
       deserializeUser: getUserById,
-      isAuthorized: async user => user.id === '1',
+      isAuthorized: async user => {
+        console.log('USER!', user);
+        return user.id === 8;
+      },
     },
     crossServiceAuthPluginOption: {
       auth: {
@@ -125,9 +131,8 @@ const fastifyLoader = async ({
         env.CROSS_SERVICE.TOKEN_DURATION || '10',
         10,
       ),
-      ipRange: env.NODE_ENV === 'production'
-        ? PrivateIpRanges
-        : LocalHostIpRanges,
+      ipRange:
+        env.NODE_ENV === 'production' ? PrivateIpRanges : LocalHostIpRanges,
       // serviceAccountMap,
       deserializeUser: getUserById,
     },
@@ -160,8 +165,7 @@ const fastifyLoader = async ({
     graphiql: env.NODE_ENV === 'development' ? 'graphiql' : undefined,
 
     errorFormatter(response) {
-      const isCrossServiceError =
-        response instanceof CrossServiceError;
+      const isCrossServiceError = response instanceof CrossServiceError;
       return {
         statusCode: isCrossServiceError ? 401 : 200,
         response: {
@@ -184,9 +188,7 @@ const fastifyLoader = async ({
   const rootPath =
     env.NODE_ENV === 'development' ? locate('../../..') : '../../..';
 
-  const allowedOrigin: (string | RegExp)[] = [
-    new RegExp(env.CORS_ORIGIN),
-  ];
+  const allowedOrigin: (string | RegExp)[] = [new RegExp(env.CORS_ORIGIN)];
   if (env.NODE_ENV === 'development') {
     allowedOrigin.push(new RegExp('localhost'));
   }
@@ -205,6 +207,7 @@ const fastifyLoader = async ({
     await app.register(fastifyExpress);
     app.use(vite.middlewares);
   }
+  logger.debug(`HELLO${path.join(__dirname, `${rootPath}/client/assets`)}`);
 
   if (!vite) {
     // Register Static Server

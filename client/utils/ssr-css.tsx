@@ -13,7 +13,6 @@ export { ServerCacheProvider as CacheProvider };
 
 export function extractEmotion(renderedString: string) {
   const { html, css, ids } = extractCritical(renderedString);
-  console.error('hello?', css)
   const style = `<style data-emotion="${key} ${ids.join(' ')}">${css}</style>`;
   return { style, html };
 }

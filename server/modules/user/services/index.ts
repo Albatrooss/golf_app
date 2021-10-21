@@ -1,4 +1,5 @@
-import { formatScores } from '@/server/utils';
+import { formatScores } from '../../../utils';
+// import { formatScores } from '@/server/utils';
 import { Service } from 'typedi';
 import { User, Role } from '../models';
 import { UserRepository } from '../repository';
@@ -11,9 +12,8 @@ class UserService {
     return await this.UserRepository.create(username, password);
   }
 
-  async find(id: number): Promise<User | null> {
-    const rawUser = await this.UserRepository.find(id);
-    console.log('rawUser', rawUser);
+  async findbyId(id: number): Promise<User | null> {
+    const rawUser = await this.UserRepository.findById(id);
     if (!rawUser) return null;
     const h = {
       id: rawUser.id,
@@ -21,7 +21,6 @@ class UserService {
       role: rawUser.role,
       scores: rawUser.scores.map(formatScores),
     };
-    console.log('!!', h);
     return h;
   }
 }
