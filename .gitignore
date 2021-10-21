@@ -2,6 +2,7 @@
 __generated__
 node_modules/
 .env
+dist
 
 prisma/generated/
 prisma/migrations/

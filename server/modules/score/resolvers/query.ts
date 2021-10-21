@@ -1,7 +1,7 @@
-import { Resolver } from "type-graphql";
-import { Inject } from "typedi";
+import { Resolver } from 'type-graphql';
+import { Inject } from 'typedi';
 
 @Resolver()
 class ScoreQueryResolver {
-  @Inject() scoreService!: 
+  // @Inject() scoreService!:
 }

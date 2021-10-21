@@ -1,10 +1,42 @@
 import React from 'react';
-import { styled, css } from '@/utils/';
+import gql from 'graphql-tag';
+import { styled, css } from '@/utils';
 import { UserOutlined } from '@ant-design/icons';
+import { useAuthContext } from '@/contexts';
+import { useQuery } from '@apollo/client';
+import { meDocument } from './__generated__';
 
 interface comProps {}
 
 const RankCard = ({}: comProps) => {
+  const {
+    auth: { id },
+  } = useAuthContext();
+
+  const ME = gql`
+    query me($id: Int!) {
+      me(id: $id) {
+        username
+        role
+        scores {
+          date
+          front
+          back
+        }
+      }
+    }
+  ` as meDocument;
+
+  const { data, loading } = useQuery(ME, {
+    variables: {
+      id,
+    },
+  });
+  if (loading) return <h1>Loading...</h1>;
+  console.log('data', data?.me);
+
+  const {} = data;
+
   return (
     <Wrapper>
       <Left>
@@ -13,7 +45,7 @@ const RankCard = ({}: comProps) => {
       <Right>
         <Top>
           <Player>
-            <PlayerText>ALBATROOSS</PlayerText>
+            <PlayerText>{data?.me.username.toUpperCase()}</PlayerText>
           </Player>
           <HandicapWrapper>
             <Handicap>-23</Handicap>
@@ -51,7 +83,7 @@ const Wrapper = styled.div`
 const Left = styled.div`
   width: 98px;
   height: 100%;
-  background-color: ${({theme}) => theme.color.white};
+  background-color: ${({ theme }) => theme.color.white};
   display: flex;
   justify-content: center;
   align-items: center;
@@ -60,8 +92,8 @@ const Left = styled.div`
 const StyledUserOutlined = styled(UserOutlined)`
   font-size: 60px;
   border: 4px solid black;
-   border-radius: 50%;
-   padding: 8px;
+  border-radius: 50%;
+  padding: 8px;
 `;
 
 const Right = styled.div`
@@ -110,6 +142,6 @@ const Bottom = styled.div`
 `;
 
 const Text = styled.span`
-  color: ${({theme}) => theme.color.white};
-  font-size:36px;
+  color: ${({ theme }) => theme.color.white};
+  font-size: 36px;
 `;

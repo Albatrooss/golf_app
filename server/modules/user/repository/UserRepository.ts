@@ -18,18 +18,18 @@ class UserRepository {
     });
   }
 
-  async find(id: number) {
+  async findById(id: number) {
     return await this.dbContext.findUnique({
       where: {
-        id
+        id,
       },
       select: {
         id: true,
         username: true,
         role: true,
-        scores: true
-      }
-    })
+        scores: true,
+      },
+    });
   }
 }
 

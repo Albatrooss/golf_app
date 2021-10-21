@@ -1,4 +1,8 @@
-export { default as AuthContext, AuthContextProvider } from './AuthContext';
+export {
+  default as AuthContext,
+  AuthContextProvider,
+  useAuthContext,
+} from './AuthContext';
 export type { AuthContextType } from './AuthContext';
 
 export {

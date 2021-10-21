@@ -22,26 +22,10 @@ textarea,
 html body {
   font-family: 'Poppins', system-ui, YuGothic, sans-serif;
 }
-.ant-btn-primary {
-  background: var(--color-primary);
-  border-color: var(--color-primary);
-}
-.ant-switch-checked {
-  background: var(--color-primary);
-}
-.ant-menu-item-selected,
-.ant-menu-submenu-selected {
-  color: var(--color-primary);
-}
-.ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
-  background: #e8f0ff;
-}
-.ant-table-thead > tr > th {
-  color: #8c8c8c;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-}
-.ant-card {
-  border-radius: 6px;
-  box-shadow: 1px 1px 15px 5px rgba(0, 0, 0, 0.01);
+.ohohoh-bg {
+  background-image: url(./assets/ohohoh_bg02.png);
+  transition: all 0.2s;
+  background-repeat: repeat;
+  width: 100%;
+  min-height: 100vh;
 }
